@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+
+<project name="vaadin-shared-deps" basedir="." default="jar" xmlns:ivy="antlib:org.apache.ivy.ant" xmlns:artifact="antlib:org.apache.maven.artifact.ant">
+	<property name="module.name" value="vaadin-shared-deps" />
+	<property name="version" value="1.0-SNAPSHOT" />
+	<property name="maven.repository.id" value="vaadin-snapshots" />
+	<property name="vaadin.vendor" value="Vaadin Ltd" />
+	<property name="module.symbolic.name" value="com.vaadin.shared.deps" />
+	<property name="result" location="result" />
+	<property name="jar.file" location="${result}/${module.name}-${version}.jar" />
+	<property name="pom.file" location="${result}/${module.name}-${version}.pom" />
+	<property name="maven.repository.url" value="https://oss.sonatype.org/content/repositories/${maven.repository.id}" />
+
+	<!-- ant contrib for Maven integration -->
+	<taskdef resource="org/apache/maven/artifact/ant/antlib.xml" uri="antlib:org.apache.maven.artifact.ant" classpath="../lib/maven-ant-tasks-2.0.10.jar" />
+
+	<fileset id="osgi-export.libs" dir="../lib" includes="*.jar" />
+
+	<target name="pom.xml">
+		<copy file="../pom-template.xml" tofile="${pom.file}">
+			<filterchain>
+				<replacetokens begintoken="@" endtoken="@">
+					<token key="version" value="${version}" />
+					<token key="module.name" value="${module.name}" />
+				</replacetokens>
+			</filterchain>
+		</copy>
+	</target>
+
+	<target name="jar" depends="pom.xml">
+		<jar file="${jar.file}">
+			<manifest>
+				<attribute name="Implementation-Vendor" value="${vaadin.vendor}" />
+				<attribute name="Implementation-URL" value="http://vaadin.com" />
+				<attribute name="Implementation-Version" value="${version}" />
+				<attribute name="Bundle-Version" value="${version}" />
+				<attribute name="Bundle-ManifestVersion" value="2" />
+				<attribute name="Bundle-Name" value="${module.name}" />
+				<attribute name="Bundle-SymbolicName" value="${module.symbolic.name}" />
+				<attribute name="Bundle-Vendor" value="${vaadin.vendor}" />
+				<attribute name="Bundle-RequiredExecutionEnvironment" value="JavaSE-1.6" />
+			</manifest>
+			<zipfileset src="deps/flute-1.3-gg2.jar">
+			</zipfileset>
+			<zipfileset src="deps/guava-10.0.1-rebased.jar">
+				<exclude name="com/google/common/**" />
+			</zipfileset>
+		</jar>
+
+		<antcall target="generate-osgi-exports">
+			<param name="jar" value="${jar.file}" />
+		</antcall>
+
+	</target>
+	<target name="generate-osgi-exports">
+		<fail unless="jar" message="No jar parameter given" />
+
+		<!-- Generate the Export-Package attribute in the manifest of the 
+            JAR -->
+		<java classname="com.vaadin.buildhelpers.GeneratePackageExports" failonerror="true" fork="yes">
+			<arg value="${jar}" />
+			<arg value="com/" />
+			<arg value="org/" />
+			<classpath>
+				<fileset refid="osgi-export.libs" />
+			</classpath>
+		</java>
+	</target>
+	<target name="deploy-to-maven" depends="jar">
+		<artifact:mvn failonerror="true">
+			<arg value="gpg:sign-and-deploy-file" />
+			<sysproperty key="file" value="${jar.file}" />
+			<sysproperty key="pomFile" value="${pom.file}" />
+			<sysproperty key="repositoryId" value="${maven.repository.id}" />
+			<sysproperty key="url" value="${maven.repository.url}" />
+			<sysproperty key="gpg.passphrase" value="${gpg.passphrase}" />
+			<sysproperty key="retryFailedDeploymentCount" value="10" />
+		</artifact:mvn>
+	</target>
+
+</project>
