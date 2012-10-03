@@ -67,6 +67,7 @@
 		</java>
 	</target>
 	<target name="deploy-to-maven" depends="jar">
+		<property file="${gpg.passphrase.file}" />
 		<artifact:mvn failonerror="true">
 			<arg value="gpg:sign-and-deploy-file" />
 			<sysproperty key="file" value="${jar.file}" />
