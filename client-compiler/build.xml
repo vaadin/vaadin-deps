@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+
+<project name="vaadin-client-compiler-deps" basedir="." default="package" xmlns:ivy="antlib:org.apache.ivy.ant">
+	<include file="../common.xml" as="common" />
+	<property name="module.name" value="vaadin-client-compiler-deps" />
+	<property name="module.symbolic.name" value="com.vaadin.client-compiler.deps" />
+	<property name="result" location="result" />
+	<property name="jar.file" location="${result}/${module.name}-${version}.jar" />
+	<property name="sources.jar.file" location="${result}/${module.name}-${version}-sources.jar" />
+	<property name="javadoc.jar.file" location="${result}/${module.name}-${version}-javadoc.jar" />
+	<property name="pom.file" location="${result}/${module.name}-${version}.pom" />
+
+	<target name="clean">
+		<delete dir="${result}" />
+	</target>
+	<target name="package" depends="clean,jar,sources.jar,javadoc.jar">
+	</target>
+
+	<target name="javadoc.jar" depends="sources.jar">
+		<property name="javadoc.temp.dir" location="${result}/javadoc.temp" />
+		<property name="src.temp.dir" location="${result}/javadoc.src.temp" />
+
+		<unzip src="${sources.jar.file}" dest="${src.temp.dir}" />
+
+		<javadoc destdir="${javadoc.temp.dir}" author="true" version="true" use="true" windowtitle="${module.name}">
+			<packageset dir="${src.temp.dir}" />
+		</javadoc>
+		<delete dir="src.temp.dir" />
+
+		<!-- Create a javadoc jar -->
+		<jar file="${javadoc.jar.file}" compress="true">
+			<fileset dir="${javadoc.temp.dir}" />
+		</jar>
+
+	</target>
+	<target name="sources.jar">
+		<jar file="${sources.jar.file}">
+			<zipfileset src="deps/tapestry-util-text-4.0.2-src.jar" />
+			<zipfileset src="deps/jdt-3.4.2_r894-src.jar" />
+			<zipfileset src="deps/icu4j-src.jar" />
+		</jar>
+	</target>
+
+	<target name="jar">
+		<antcall target="common.pom.xml" />
+		<jar file="${jar.file}">
+			<manifest>
+				<attribute name="Implementation-Vendor" value="${vendor}" />
+				<attribute name="Implementation-URL" value="http://vaadin.com" />
+				<attribute name="Implementation-Version" value="${version}" />
+				<attribute name="Bundle-Version" value="${version}" />
+				<attribute name="Bundle-ManifestVersion" value="2" />
+				<attribute name="Bundle-Name" value="${module.name}" />
+				<attribute name="Bundle-SymbolicName" value="${module.symbolic.name}" />
+				<attribute name="Bundle-Vendor" value="${vendor}" />
+				<attribute name="Bundle-RequiredExecutionEnvironment" value="JavaSE-1.6" />
+			</manifest>
+			
+			<zipfileset src="deps/tapestry-util-text-4.0.2.jar" />
+			<zipfileset src="deps/jdt-3.4.2_r894.jar" />
+			<zipfileset src="deps/icu4j.jar" />
+		</jar>
+
+		<antcall target="common.generate-osgi-exports">
+			<param name="jar" value="${jar.file}" />
+		</antcall>
+
+	</target>
+</project>
