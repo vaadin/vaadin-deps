@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+
+<project name="common" basedir="." default=""
+	xmlns:ivy="antlib:org.apache.ivy.ant">
+	<dirname property="project.root" file="${ant.file.common}" />
+	<fileset id="osgi-export.libs" dir="${project.root}/lib"
+		includes="*.jar" />
+	<property name="version" value="1.0-SNAPSHOT" />
+	<property name="vendor" value="Vaadin Ltd" />
+
+	<target name="pom.xml">
+		<fail unless="pom.file" message="No pom.file parameter given" />
+		<fail unless="module.name" message="No module.name parameter given" />
+		<fail unless="version" message="No version parameter given" />
+
+		<copy file="${project.root}/pom-template.xml" tofile="${pom.file}">
+			<filterchain>
+				<replacetokens begintoken="@" endtoken="@">
+					<token key="version" value="${version}" />
+					<token key="module.name" value="${module.name}" />
+				</replacetokens>
+			</filterchain>
+		</copy>
+	</target>
+
+	<target name="generate-osgi-exports">
+		<fail unless="jar" message="No jar parameter given" />
+
+		<!-- Generate the Export-Package attribute in the manifest of the JAR -->
+		<java classname="com.vaadin.buildhelpers.GeneratePackageExports"
+			failonerror="true" fork="yes">
+			<arg value="${jar}" />
+			<arg value="com/" />
+			<arg value="org/" />
+			<classpath>
+				<fileset refid="osgi-export.libs" />
+			</classpath>
+		</java>
+	</target>
+
+</project>
