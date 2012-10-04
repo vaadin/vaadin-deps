@@ -37,8 +37,8 @@
 	</target>
 	<target name="sources.jar">
 		<jar file="${sources.jar.file}">
-			<zipfileset src="deps/flute-1.3-gg2-src.jar">
-			</zipfileset>
+			<zipfileset src="deps/flute-1.3-gg2-src.jar"/>
+			<zipfileset src="deps/streamhtmlparser-jsilver-r10-1.5-rebased-src.jar"/>
 			<zipfileset src="deps/guava-10.0.1-rebased-src.jar">
 				<exclude name="com/google/common/**" />
 			</zipfileset>
@@ -59,8 +59,8 @@
 				<attribute name="Bundle-Vendor" value="${vendor}" />
 				<attribute name="Bundle-RequiredExecutionEnvironment" value="JavaSE-1.6" />
 			</manifest>
-			<zipfileset src="deps/flute-1.3-gg2.jar">
-			</zipfileset>
+			<zipfileset src="deps/flute-1.3-gg2.jar"/>
+			<zipfileset src="deps/streamhtmlparser-jsilver-r10-1.5-rebased.jar"/>
 			<zipfileset src="deps/guava-10.0.1-rebased.jar">
 				<exclude name="com/google/common/**" />
 			</zipfileset>
