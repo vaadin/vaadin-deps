@@ -55,7 +55,7 @@
 				<attribute name="Bundle-Vendor" value="${vendor}" />
 				<attribute name="Bundle-RequiredExecutionEnvironment" value="JavaSE-1.6" />
 			</manifest>
-			
+
 			<zipfileset src="deps/tapestry-util-text-4.0.2.jar" />
 			<zipfileset src="deps/jdt-3.4.2_r894.jar" />
 			<zipfileset src="deps/icu4j.jar" />
@@ -66,4 +66,25 @@
 		</antcall>
 
 	</target>
+
+	<target name="common.generate-osgi-exports">
+		<!-- Generate the Export-Package attribute in the manifest of the JAR -->
+		<java classname="com.vaadin.buildhelpers.GeneratePackageExports" failonerror="true" fork="yes">
+			<arg value="${jar}" />
+
+			<arg value="org/apache/tapestry/util/text/" />
+			<jvmarg value="-Dversion.org.apache.tapestry.util.text=4.0.2" />
+
+			<arg value="com/ibm/icu/" />
+			<jvmarg value="-Dversion.com.ibm.icu=0.0.1.unknown" />
+
+			<arg value="org/eclipse/jdt/" />
+			<jvmarg value="-Dversion.org.eclipse.jdt=3.4.4.v_894_R34x" />
+
+			<classpath>
+				<fileset refid="osgi-export.libs" />
+			</classpath>
+		</java>
+	</target>
+
 </project>

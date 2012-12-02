@@ -23,19 +23,4 @@
 		</copy>
 	</target>
 
-	<target name="generate-osgi-exports">
-		<fail unless="jar" message="No jar parameter given" />
-
-		<!-- Generate the Export-Package attribute in the manifest of the JAR -->
-		<java classname="com.vaadin.buildhelpers.GeneratePackageExports"
-			failonerror="true" fork="yes">
-			<arg value="${jar}" />
-			<arg value="com/" />
-			<arg value="org/" />
-			<classpath>
-				<fileset refid="osgi-export.libs" />
-			</classpath>
-		</java>
-	</target>
-
 </project>

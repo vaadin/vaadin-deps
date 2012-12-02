@@ -75,4 +75,26 @@
 		</antcall>
 
 	</target>
+	<target name="common.generate-osgi-exports">
+		<!-- Generate the Export-Package attribute in the manifest of the JAR -->
+		<java classname="com.vaadin.buildhelpers.GeneratePackageExports" failonerror="true" fork="yes">
+			<arg value="${jar}" />
+
+			<arg value="com/google/gwt/thirdparty/guava/" />
+			<jvmarg value="-Dversion.com.google.gwt.thirdparty.guava=10.0.1.rebased" />
+
+			<arg value="com/google/gwt/thirdparty/streamhtmlparser/" />
+			<jvmarg value="-Dversion.com.google.gwt.thirdparty.streamhtmlparser=0.1.5.r10-rebased" />
+
+			<arg value="org/json/" />
+			<jvmarg value="-Dversion.org.json=0.0.20080701" />
+
+			<arg value="org/w3c/flute/" />
+			<jvmarg value="-Dversion.org.w3c.flute=1.3.0.gg2" />
+
+			<classpath>
+				<fileset refid="osgi-export.libs" />
+			</classpath>
+		</java>
+	</target>
 </project>
