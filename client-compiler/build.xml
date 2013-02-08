@@ -38,12 +38,25 @@
 			<zipfileset src="deps/tapestry-util-text-4.0.2-src.jar" />
 			<zipfileset src="deps/jdt-3.4.2_r894-src.jar" />
 			<zipfileset src="deps/icu4j-src.jar" />
+			<!--<zipfileset src="deps/jscomp-r1649-compiler-rebased-src.jar" />-->
+			<zipfileset src="deps/htmlunit-2.9-src.jar" />
+			<zipfileset src="deps/htmlunit-core-js-2.9-src.jar" />
+			<!--<zipfileset src="deps/protobuf-java-rebased-2.2.0-src.jar" />-->
+			<!--<zipfileset src="deps/nekohtml-1.9.15-src.jar " />-->
+			<zipfileset src="deps/java-cup-11a-src.jar" />
+			<!--<zipfileset src="deps/xercesImpl-NoMetaInf-src.jar" />-->
+			<!--<zipfileset src="deps/serializer-src.jar" />-->
+			<!--<zipfileset src="deps/xml-apis-src.jar" />-->
+			<!--<zipfileset src="deps/xalan-2.7.1-nocup-src.jar" />-->
+			<!--<zipfileset src="deps/httpclient-4.1.2-src.jar" />-->
+			<!--<zipfileset src="deps/httpcore-4.1.2-src.jar" />-->
+			<!--<zipfileset src="deps/httpmime-4.1.2-src.jar" />-->
 		</jar>
 	</target>
 
 	<target name="jar">
 		<antcall target="common.pom.xml" />
-		<jar file="${jar.file}">
+		<jar file="${jar.file}" duplicate="fail">
 			<manifest>
 				<attribute name="Implementation-Vendor" value="${vendor}" />
 				<attribute name="Implementation-URL" value="http://vaadin.com" />
@@ -59,6 +72,20 @@
 			<zipfileset src="deps/tapestry-util-text-4.0.2.jar" />
 			<zipfileset src="deps/jdt-3.4.2_r894.jar" />
 			<zipfileset src="deps/icu4j.jar" />
+			<zipfileset src="deps/protobuf-java-rebased-2.2.0.jar" />
+			<zipfileset src="deps/httpclient-4.1.2.jar" />
+			<!-- Exclude files already included from httpclient -->
+			<zipfileset src="deps/httpcore-4.1.2.jar" excludes="META-INF/LICENSE.txt,META-INF/NOTICE.txt" />
+			<zipfileset src="deps/httpmime-4.1.2.jar" excludes="META-INF/LICENSE.txt,META-INF/NOTICE.txt" />
+			<zipfileset src="deps/htmlunit-2.9.jar" />
+			<zipfileset src="deps/htmlunit-core-js-2.9.jar" />
+			<zipfileset src="deps/nekohtml-1.9.15.jar" />
+			<zipfileset src="deps/java-cup-11a.jar" />
+			<zipfileset src="deps/xalan-2.7.1-nocup.jar" />
+			<zipfileset src="deps/serializer.jar" />
+			<zipfileset src="deps/xercesImpl-NoMetaInf.jar" />
+			<zipfileset src="deps/xml-apis.jar" />
+			<zipfileset src="deps/jscomp-r1649-compiler-rebased.jar" excludes="com/google/gwt/thirdparty/guava/**" />
 		</jar>
 
 		<antcall target="common.generate-osgi-exports">
@@ -74,12 +101,72 @@
 
 			<arg value="org/apache/tapestry/util/text/" />
 			<jvmarg value="-Dversion.org.apache.tapestry.util.text=4.0.2" />
-
 			<arg value="com/ibm/icu/" />
 			<jvmarg value="-Dversion.com.ibm.icu=0.0.1.unknown" />
-
 			<arg value="org/eclipse/jdt/" />
-			<jvmarg value="-Dversion.org.eclipse.jdt=3.4.4.v_894_R34x" />
+			<jvmarg value="-Dversion.org.eclipse.jdt=3.4.2.r894" />
+			<arg value="org/apache/tapestry/" />
+			<jvmarg value="-Dversion.org.apache.tapestry=4.0.2" />
+			<arg value="com/gargoylesoftware/htmlunit" />
+			<jvmarg value="-Dversion.com.gargoylesoftware.htmlunit=2.9" />
+			<arg value="net/sourceforge/htmlunit/" />
+			<jvmarg value="-Dversion.net.sourceforge.htmlunit=2.9" />
+			<arg value="org/apache/http/" />
+			<jvmarg value="-Dversion.org.apache.http=4.1.2" />
+			<arg value="java_cup/" />
+			<jvmarg value="-Dversion.java_cup=0.0.11a" />
+			<arg value="javax/annotation/" />
+			<jvmarg value="-Dversion.javax.annotation=0.0.0.r1649" />
+			<arg value="rhino_ast/java/com/google/javascript/rhino/" />
+			<jvmarg value="-Dversion.rhino_ast.java.com.google.javascript.rhino=0.0.0.r1649" />
+			<arg value="org/kohsuke/args4j/" />
+			<jvmarg value="-Dversion.org.kohsuke.args4j=0.0.0.r1649" />
+			<arg value="com/google/gwt/thirdparty/mozilla/classfile/" />
+			<jvmarg value="-Dversion.com.google.gwt.thirdparty.mozilla.classfile=0.0.0.r1649" />
+			<arg value="com/google/gwt/thirdparty/javascript/" />
+			<jvmarg value="-Dversion.com.google.gwt.thirdparty.javascript=0.0.0.r1649" />
+			<arg value="com/google/gwt/thirdparty/debugging/sourcemap/" />
+			<jvmarg value="-Dversion.com.google.gwt.thirdparty.debugging.sourcemap=0.0.0.r1649" />
+			<arg value="com/google/debugging/sourcemap/" />
+			<jvmarg value="-Dversion.com.google.debugging.sourcemap=0.0.0.r1649" />
+			<arg value="org/cyberneko/html/" />
+			<jvmarg value="-Dversion.org.cyberneko.html=1.9.15" />
+			<arg value="com/google/gwt/dev/protobuf/" />
+			<jvmarg value="-Dversion.com.google.gwt.dev.protobuf=2.2.0.rebased" />
+
+			<!-- Xalan -->
+			<arg value="org/apache/xpath/" />
+			<jvmarg value="-Dversion.org.apache.xpath=2.7.1.nocup" />
+			<arg value="org/apache/xml/utils/" />
+			<jvmarg value="-Dversion.org.apache.xml.utils=2.7.1.nocup" />
+			<arg value="org/apache/xml/res/" />
+			<jvmarg value="-Dversion.org.apache.xml.res=2.7.1.nocup" />
+			<arg value="org/apache/xml/dtm/" />
+			<jvmarg value="-Dversion.org.apache.xml.dtm=2.7.1.nocup" />
+			<arg value="org/apache/xalan/" />
+			<jvmarg value="-Dversion.org.apache.xalan=2.7.1.nocup" />
+			<arg value="org/apache/regexp/" />
+			<jvmarg value="-Dversion.org.apache.regexp=2.7.1.nocup" />
+			<arg value="org/apache/bcel/" />
+			<jvmarg value="-Dversion.org.apache.bcel=2.7.1.nocup" />
+
+			<!-- Xerces -->
+			<arg value="org/w3c/dom/" />
+			<jvmarg value="-Dversion.org.w3c.dom=2.9.1" />
+			<arg value="org/apache/xml/serializer/" />
+			<jvmarg value="-Dversion.org.apache.xml.serializer=2.9.1" />
+			<arg value="org/apache/xml/serialize/" />
+			<jvmarg value="-Dversion.org.apache.xml.serialize=2.9.1" />
+			<arg value="org/apache/xerces/" />
+			<jvmarg value="-Dversion.org.apache.xerces=2.9.1" />
+			<arg value="org/apache/wml/" />
+			<jvmarg value="-Dversion.org.apache.wml=2.9.1" />
+			<arg value="org/apache/html/dom/" />
+			<jvmarg value="-Dversion.org.apache.html.dom=2.9.1" />
+			<arg value="org/xml/sax/" />
+			<jvmarg value="-Dversion.org.xml.sax=2.9.1" />
+			<arg value="org/apache/xmlcommons/" />
+			<jvmarg value="-Dversion.org.apache.xmlcommons=2.9.1" />
 
 			<classpath>
 				<fileset refid="osgi-export.libs" />
