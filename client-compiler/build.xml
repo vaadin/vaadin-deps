@@ -70,22 +70,50 @@
 			</manifest>
 
 			<zipfileset src="deps/tapestry-util-text-4.0.2.jar" />
-			<zipfileset src="deps/jdt-3.4.2_r894.jar" />
-			<zipfileset src="deps/icu4j.jar" />
+			<zipfileset src="deps/jdt-3.4.2_r894.jar">
+				<exclude name="about.html" />
+			</zipfileset>
+			<zipfileset src="deps/icu4j.jar">
+				<exclude name="license.html" />
+				<exclude name="unicode-license.txt" />
+			</zipfileset>
 			<zipfileset src="deps/protobuf-java-rebased-2.2.0.jar" />
-			<zipfileset src="deps/httpclient-4.1.2.jar" />
-			<!-- Exclude files already included from httpclient -->
-			<zipfileset src="deps/httpcore-4.1.2.jar" excludes="META-INF/LICENSE.txt,META-INF/NOTICE.txt" />
-			<zipfileset src="deps/httpmime-4.1.2.jar" excludes="META-INF/LICENSE.txt,META-INF/NOTICE.txt" />
+			<zipfileset src="deps/httpclient-4.1.2.jar">
+				<exclude name="META-INF/LICENSE.txt" />
+				<exclude name="META-INF/NOTICE.txt" />
+			</zipfileset>
+
+			<zipfileset src="deps/httpcore-4.1.2.jar">
+				<exclude name="META-INF/LICENSE.txt" />
+				<exclude name="META-INF/NOTICE.txt" />
+			</zipfileset>
+			<zipfileset src="deps/httpmime-4.1.2.jar">
+				<exclude name="META-INF/LICENSE.txt" />
+				<exclude name="META-INF/NOTICE.txt" />
+			</zipfileset>
 			<zipfileset src="deps/htmlunit-2.9.jar" />
-			<zipfileset src="deps/htmlunit-core-js-2.9.jar" />
-			<zipfileset src="deps/nekohtml-1.9.15.jar" />
+			<zipfileset src="deps/htmlunit-core-js-2.9.jar">
+				<exclude name="rhinoDiff.txt" />
+			</zipfileset>
+
+			<zipfileset src="deps/nekohtml-1.9.15.jar">
+				<exclude name="LICENSE.txt" />
+			</zipfileset>
+
 			<zipfileset src="deps/java-cup-11a.jar" />
 			<zipfileset src="deps/xalan-2.7.1-nocup.jar" />
 			<zipfileset src="deps/serializer.jar" />
-			<zipfileset src="deps/xercesImpl-NoMetaInf.jar" />
+			<zipfileset src="deps/xercesImpl-NoMetaInf.jar">
+				<exclude name="META-INF/LICENSE" />
+				<exclude name="META-INF/NOTICE" />
+			</zipfileset>
+
 			<zipfileset src="deps/xml-apis.jar" />
-			<zipfileset src="deps/jscomp-r1649-compiler-rebased.jar" excludes="com/google/gwt/thirdparty/guava/**" />
+			<zipfileset src="deps/jscomp-r1649-compiler-rebased.jar">
+				<exclude name="com/google/gwt/thirdparty/guava/**" />
+				<exclude name="externs.zip" />
+			</zipfileset>
+			<fileset dir="../licenses" />
 		</jar>
 
 		<antcall target="common.generate-osgi-exports">
