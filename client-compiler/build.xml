@@ -75,7 +75,6 @@
 			</zipfileset>
 			<zipfileset src="deps/icu4j.jar">
 				<exclude name="license.html" />
-				<exclude name="unicode-license.txt" />
 			</zipfileset>
 			<zipfileset src="deps/protobuf-java-rebased-2.2.0.jar" />
 			<zipfileset src="deps/httpclient-4.1.2.jar">
@@ -130,7 +129,7 @@
 			<arg value="org/apache/tapestry/util/text/" />
 			<jvmarg value="-Dversion.org.apache.tapestry.util.text=4.0.2" />
 			<arg value="com/ibm/icu/" />
-			<jvmarg value="-Dversion.com.ibm.icu=0.0.1.unknown" />
+			<jvmarg value="-Dversion.com.ibm.icu=50.1.1" />
 			<arg value="org/eclipse/jdt/" />
 			<jvmarg value="-Dversion.org.eclipse.jdt=3.4.2.r894" />
 			<arg value="org/apache/tapestry/" />
