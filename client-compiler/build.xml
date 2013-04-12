@@ -110,7 +110,6 @@
 			<zipfileset src="deps/xml-apis.jar" />
 			<zipfileset src="deps/jscomp-r1649-compiler-rebased.jar">
 				<exclude name="com/google/gwt/thirdparty/guava/**" />
-				<exclude name="externs.zip" />
 			</zipfileset>
 			<fileset dir="../licenses" />
 		</jar>
