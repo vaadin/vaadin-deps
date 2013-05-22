@@ -81,6 +81,8 @@
 				<exclude name="META-INF/eclipse.inf" />
 				<exclude name="plugin.properties" />
 				<exclude name="plugin.xml" />
+				<exclude name=".api_description" />
+				<exclude name=".options" />
 			</zipfileset>
 
 			<zipfileset src="deps/icu4j.jar">
