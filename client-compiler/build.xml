@@ -36,7 +36,7 @@
 	<target name="sources.jar">
 		<jar file="${sources.jar.file}">
 			<zipfileset src="deps/tapestry-util-text-4.0.2-src.jar" />
-			<zipfileset src="deps/jdt-3.4.2_r894-src.jar" />
+			<zipfileset src="deps/org.eclipse.jdt.core.source_3.8.3.v20130121-145325.jar" />
 			<zipfileset src="deps/icu4j-src.jar" />
 			<!--<zipfileset src="deps/jscomp-r1649-compiler-rebased-src.jar" />-->
 			<zipfileset src="deps/htmlunit-2.9-src.jar" />
@@ -70,9 +70,19 @@
 			</manifest>
 
 			<zipfileset src="deps/tapestry-util-text-4.0.2.jar" />
-			<zipfileset src="deps/jdt-3.4.2_r894.jar">
-				<exclude name="about.html" />
+
+			<zipfileset src="deps/jdtCompilerAdapter-3.8.3.v20130121-145325.jar" >
+				<exclude name="plugin.properties" />
+				<exclude name="plugin.xml" />
 			</zipfileset>
+			<zipfileset src="deps/org.eclipse.jdt.core_3.8.3.v20130121-145325.jar">
+				<exclude name="about.html" />
+				<exclude name="jdtCompilerAdapter.jar" />
+				<exclude name="META-INF/eclipse.inf" />
+				<exclude name="plugin.properties" />
+				<exclude name="plugin.xml" />
+			</zipfileset>
+
 			<zipfileset src="deps/icu4j.jar">
 				<exclude name="license.html" />
 			</zipfileset>
@@ -130,7 +140,7 @@
 			<arg value="com/ibm/icu/" />
 			<jvmarg value="-Dversion.com.ibm.icu=50.1.1" />
 			<arg value="org/eclipse/jdt/" />
-			<jvmarg value="-Dversion.org.eclipse.jdt=3.4.2.r894" />
+			<jvmarg value="-Dversion.org.eclipse.jdt=3.8.3.v20130121-145325" />
 			<arg value="org/apache/tapestry/" />
 			<jvmarg value="-Dversion.org.apache.tapestry=4.0.2" />
 			<arg value="com/gargoylesoftware/htmlunit" />
