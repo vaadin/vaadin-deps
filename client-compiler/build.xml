@@ -152,7 +152,7 @@
 			<arg value="org/apache/http/" />
 			<jvmarg value="-Dversion.org.apache.http=4.1.2" />
 			<arg value="java_cup/" />
-			<jvmarg value="-Dversion.java_cup=0.0.11a" />
+			<jvmarg value="-Dversion.java_cup=0.0.11.a" />
 			<arg value="javax/annotation/" />
 			<jvmarg value="-Dversion.javax.annotation=0.0.0.r1649" />
 			<arg value="rhino_ast/java/com/google/javascript/rhino/" />
