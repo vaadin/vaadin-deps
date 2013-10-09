@@ -39,7 +39,7 @@
 		<jar file="${sources.jar.file}">
 			<zipfileset src="deps/flute-1.3-gg2-src.jar" />
 			<zipfileset src="deps/streamhtmlparser-jsilver-r10-1.5-rebased-src.jar" />
-			<zipfileset src="deps/guava-10.0.1-rebased-src.jar">
+			<zipfileset src="deps/guava-15.0-rebased-src.jar">
 				<exclude name="com/google/common/**" />
 			</zipfileset>
 			<zipfileset src="deps/json-20080701-sources.jar" />
@@ -62,7 +62,7 @@
 			</manifest>
 			<zipfileset src="deps/flute-1.3-gg2.jar" />
 			<zipfileset src="deps/streamhtmlparser-jsilver-r10-1.5-rebased.jar" />
-			<zipfileset src="deps/guava-10.0.1-rebased.jar">
+			<zipfileset src="deps/guava-15.0-rebased.jar">
 				<exclude name="com/google/common/**" />
 			</zipfileset>
 			<zipfileset src="deps/json-20080701.jar">
@@ -81,7 +81,7 @@
 			<arg value="${jar}" />
 
 			<arg value="com/google/gwt/thirdparty/guava/" />
-			<jvmarg value="-Dversion.com.google.gwt.thirdparty.guava=10.0.1.rebased" />
+			<jvmarg value="-Dversion.com.google.gwt.thirdparty.guava=15.0.rebased" />
 
 			<arg value="com/google/gwt/thirdparty/streamhtmlparser/" />
 			<jvmarg value="-Dversion.com.google.gwt.thirdparty.streamhtmlparser=0.1.5.r10-rebased" />
