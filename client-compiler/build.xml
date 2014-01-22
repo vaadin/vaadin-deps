@@ -37,7 +37,6 @@
 		<jar file="${sources.jar.file}">
 			<zipfileset src="deps/tapestry-util-text-4.0.2-src.jar" />
 			<zipfileset src="deps/org.eclipse.jdt.core.source_3.8.3.v20130121-145325.jar" />
-			<zipfileset src="deps/icu4j-src.jar" />
 			<!--<zipfileset src="deps/compiler-20131118-java6-rebased-src.jar" />-->
 			<!--<zipfileset src="deps/sourcemap-20131118-java6-rebased-src.jar" />-->
 			<!--<zipfileset src="deps/htmlunit-2.13-src.jar" />-->
@@ -79,10 +78,6 @@
 				<exclude name=".options" />
 			</zipfileset>
 
-			<zipfileset src="deps/icu4j.jar">
-				<exclude name="license.html" />
-			</zipfileset>
-			
 			<zipfileset src="deps/protobuf-java-rebased-2.5.0.jar" />
 		    
 			<zipfileset src="deps/htmlunit-2.13.jar" />
@@ -110,8 +105,6 @@
 
 			<arg value="org/apache/tapestry/util/text/" />
 			<jvmarg value="-Dversion.org.apache.tapestry.util.text=4.0.2" />
-			<arg value="com/ibm/icu/" />
-			<jvmarg value="-Dversion.com.ibm.icu=50.1.1" />
 			<arg value="org/eclipse/jdt/" />
 			<jvmarg value="-Dversion.org.eclipse.jdt=3.8.3.v20130121-145325" />
 			<arg value="org/apache/tapestry/" />
