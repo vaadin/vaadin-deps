@@ -49,9 +49,6 @@
 			<!--<zipfileset src="deps/serializer-src.jar" />-->
 			<!--<zipfileset src="deps/xml-apis-src.jar" />-->
 			<!--<zipfileset src="deps/xalan-2.7.1-nocup-src.jar" />-->
-			<!--<zipfileset src="deps/httpclient-4.1.2-src.jar" />-->
-			<!--<zipfileset src="deps/httpcore-4.1.2-src.jar" />-->
-			<!--<zipfileset src="deps/httpmime-4.1.2-src.jar" />-->
 		</jar>
 	</target>
 
@@ -92,19 +89,6 @@
 			
 			<zipfileset src="deps/protobuf-java-rebased-2.5.0.jar" />
 		    
-			<zipfileset src="deps/httpclient-4.1.2.jar">
-				<exclude name="META-INF/LICENSE.txt" />
-				<exclude name="META-INF/NOTICE.txt" />
-			</zipfileset>
-
-			<zipfileset src="deps/httpcore-4.1.2.jar">
-				<exclude name="META-INF/LICENSE.txt" />
-				<exclude name="META-INF/NOTICE.txt" />
-			</zipfileset>
-			<zipfileset src="deps/httpmime-4.1.2.jar">
-				<exclude name="META-INF/LICENSE.txt" />
-				<exclude name="META-INF/NOTICE.txt" />
-			</zipfileset>
 			<zipfileset src="deps/htmlunit-2.13.jar" />
 			<zipfileset src="deps/htmlunit-core-js-2.13.jar">
 				<exclude name="rhinoDiff.txt" />
@@ -153,8 +137,6 @@
 			<arg value="net/sourceforge/htmlunit/" />
 			<jvmarg value="-Dversion.net.sourceforge.htmlunit=2.13" />
 		    
-			<arg value="org/apache/http/" />
-			<jvmarg value="-Dversion.org.apache.http=4.1.2" />
 			<arg value="java_cup/" />
 			<jvmarg value="-Dversion.java_cup=0.0.11.a" />
 
