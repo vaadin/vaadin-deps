@@ -40,8 +40,8 @@
 			<zipfileset src="deps/icu4j-src.jar" />
 			<!--<zipfileset src="deps/compiler-20131118-java6-rebased-src.jar" />-->
 			<!--<zipfileset src="deps/sourcemap-20131118-java6-rebased-src.jar" />-->
-			<zipfileset src="deps/htmlunit-2.9-src.jar" />
-			<zipfileset src="deps/htmlunit-core-js-2.9-src.jar" />
+			<!--<zipfileset src="deps/htmlunit-2.13-src.jar" />-->
+			<!--<zipfileset src="deps/htmlunit-core-js-2.13-src.jar" />-->
 			<!--<zipfileset src="deps/protobuf-java-rebased-2.2.0-src.jar" />-->
 			<!--<zipfileset src="deps/nekohtml-1.9.15-src.jar " />-->
 			<zipfileset src="deps/java-cup-11a-src.jar" />
@@ -103,8 +103,8 @@
 				<exclude name="META-INF/LICENSE.txt" />
 				<exclude name="META-INF/NOTICE.txt" />
 			</zipfileset>
-			<zipfileset src="deps/htmlunit-2.9.jar" />
-			<zipfileset src="deps/htmlunit-core-js-2.9.jar">
+			<zipfileset src="deps/htmlunit-2.13.jar" />
+			<zipfileset src="deps/htmlunit-core-js-2.13.jar">
 				<exclude name="rhinoDiff.txt" />
 			</zipfileset>
 
@@ -145,10 +145,12 @@
 			<jvmarg value="-Dversion.org.eclipse.jdt=3.8.3.v20130121-145325" />
 			<arg value="org/apache/tapestry/" />
 			<jvmarg value="-Dversion.org.apache.tapestry=4.0.2" />
+		    
 			<arg value="com/gargoylesoftware/htmlunit" />
-			<jvmarg value="-Dversion.com.gargoylesoftware.htmlunit=2.9" />
+			<jvmarg value="-Dversion.com.gargoylesoftware.htmlunit=2.13" />
 			<arg value="net/sourceforge/htmlunit/" />
-			<jvmarg value="-Dversion.net.sourceforge.htmlunit=2.9" />
+			<jvmarg value="-Dversion.net.sourceforge.htmlunit=2.13" />
+		    
 			<arg value="org/apache/http/" />
 			<jvmarg value="-Dversion.org.apache.http=4.1.2" />
 			<arg value="java_cup/" />
