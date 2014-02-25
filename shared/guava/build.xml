@@ -1,0 +1,87 @@
+<?xml version="1.0"?>
+
+<project name="vaadin-shared-deps" basedir="." default="package" xmlns:ivy="antlib:org.apache.ivy.ant">
+    <property name="name" value="guava" />
+    <property name="version" value="16.0.1.vaadin1" />
+    <property name="module.symbolic.name" value="com.google.gwt.thirdparty.guava" />
+    <property name="module.classes" value="com/google/gwt/thirdparty/guava" />
+
+    <property name="vendor" value="Google" />
+    <property name="url" value="https://code.google.com/p/guava-libraries" />
+    <property name="basename" value="${name}-${version}" />
+    <property name="jar.file" location="${basename}.jar" />
+    <property name="pom.file" location="${basename}.pom" />
+    <property name="sources.jar.file" location="${basename}-sources.jar" />
+
+    <property name="result" location="result" />
+    <property name="result.pom.file" location="${result}/${basename}.pom" />
+    <property name="result.jar.file" location="${result}/${basename}.jar" />
+    <property name="result.sources.jar.file" location="${result}/${basename}-sources.jar" />
+    <property name="result.javadoc.jar.file" location="${result}/${basename}-javadoc.jar" />
+
+    <target name="clean">
+        <delete dir="${result}" />
+    </target>
+
+    <target name="package" depends="clean,jar,pom,sources.jar,javadoc.jar">
+    </target>
+    <target name="sources.jar">
+        <copy file="${sources.jar.file}" tofile="${result.sources.jar.file}" />
+    </target>
+
+    <target name="javadoc.jar">
+        <property name="javadoc.temp.dir" location="${result}/javadoc.temp" />
+        <property name="src.temp.dir" location="${result}/javadoc.src.temp" />
+
+        <unzip src="${sources.jar.file}" dest="${src.temp.dir}" />
+
+        <javadoc destdir="${javadoc.temp.dir}" author="true" version="true" use="true" windowtitle="${name}">
+            <packageset dir="${src.temp.dir}" />
+        </javadoc>
+        <delete dir="src.temp.dir" />
+
+        <!-- Create a javadoc jar -->
+        <jar file="${result.javadoc.jar.file}" compress="true">
+            <fileset dir="${javadoc.temp.dir}" />
+        </jar>
+    </target>
+
+    <target name="pom">
+        <copy file="${pom.file}" tofile="${result.pom.file}" overwrite="true" />
+    </target>
+
+    <target name="jar">
+
+        <jar file="${result.jar.file}" update="true">
+            <manifest>
+                <attribute name="Implementation-Vendor" value="${vendor}" />
+                <attribute name="Implementation-URL" value="${url}" />
+                <attribute name="Implementation-Version" value="${version}" />
+                <attribute name="Bundle-Version" value="${version}" />
+                <attribute name="Bundle-ManifestVersion" value="2" />
+                <attribute name="Bundle-Name" value="${name}" />
+                <attribute name="Bundle-SymbolicName" value="${module.symbolic.name}" />
+                <attribute name="Bundle-Vendor" value="${vendor}" />
+                <attribute name="Bundle-RequiredExecutionEnvironment" value="JavaSE-1.6" />
+            </manifest>
+            <zipfileset src="${jar.file}" />
+        </jar>
+
+        <antcall target="common.generate-osgi-exports">
+            <param name="jar" value="${result.jar.file}" />
+        </antcall>
+
+    </target>
+    <target name="common.generate-osgi-exports">
+        <!-- Generate the Export-Package attribute in the manifest of the JAR -->
+        <java classname="com.vaadin.buildhelpers.GeneratePackageExports" failonerror="true" fork="yes">
+            <arg value="${jar}" />
+            <arg value="${module.classes}" />
+            <jvmarg value="-Dversion.${module.symbolic.name}=${version}" />
+
+            <classpath>
+                <fileset id="osgi-export.libs" dir="../../lib" includes="*.jar" />
+            </classpath>
+        </java>
+    </target>
+</project>
