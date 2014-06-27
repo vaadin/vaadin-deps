@@ -35,6 +35,12 @@
             <url>http://oss.sonatype.org/content/repositories/vaadin-snapshots/</url>
         </snapshotRepository>
     </distributionManagement>
+    <developers>
+        <developer>
+            <id>douglascrockford</id>
+            <name>Douglas Crockford</name>
+        </developer>
+    </developers>
     <repositories>
         <repository>
             <id>vaadin-snapshots</id>
